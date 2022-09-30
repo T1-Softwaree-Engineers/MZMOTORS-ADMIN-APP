@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#E5E5E5">
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="193dp"
+        android:layout_height="193dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="106dp"
+        app:srcCompat="@drawable/logo_azul" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lytext"
+        android:layout_below="@+id/logo">
+
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="Log in"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/txtLogin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLogin"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Welcome Administrator"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_below="@+id/lytext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/usericon"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:hint="Username"
+        android:singleLine="true">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_below="@+id/username"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/passwd"
+        android:drawablePadding="5dp"
+
+        android:fontFamily="@font/poppins_semibold"
+        android:hint="Password">
+
+    </EditText>
+
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginRight="40dp"
+        android:backgroundTint="#0066CC"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Login">
+
+    </Button>
+
+
+</RelativeLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5E5E5"
+    tools:context=".HomeAdmin">
+
+    <TextView
+        android:id="@+id/txtlogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/racing_sans_one"
+        android:gravity="center"
+        android:text="MZMOTORS"
+        android:textSize="30dp"
+        android:textColor="#0066CC">
+
+    </TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtlogo"
+        android:layout_marginTop="40dp"
+        android:id="@+id/rtladmin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="¡Welcome! Administrator"
+            android:textSize="15dp"
+            android:id="@+id/welcomeadmin">
+
+        </TextView>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnpost"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/rtladmin"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="25dp"
+        android:backgroundTint="#0066CC"
+        android:text="ALL POST"
+        android:textAlignment="viewStart"
+        app:icon="@drawable/news"
+        app:iconPadding="10dp">
+
+    </Button>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnpost"
+        android:text="Management of all user publications."
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/btnpending"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/btnpost"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="25dp"
+        android:backgroundTint="#0066CC"
+        android:text="POST PENDING"
+        android:textAlignment="viewStart"
+        app:icon="@drawable/pending"
+        app:iconPadding="25dp">
+    </Button>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnpending"
+        android:text="Management of pending publications to be approved."
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+    </TextView>
+
+    <Button
+        android:id="@+id/btnusers"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/btnpending"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="25dp"
+        android:backgroundTint="#0066CC"
+        android:text="USERS"
+        android:textAlignment="viewStart"
+        app:icon="@drawable/users"
+        app:iconPadding="20dp">
+    </Button>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnusers"
+        android:text="Management of all users"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+    </TextView>
+
+    <Button
+        android:id="@+id/btnlogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnusers"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginRight="40dp"
+        android:backgroundTint="#0066CC"
+        android:text="log out">
+
+    </Button>
+
+
+</RelativeLayout>
