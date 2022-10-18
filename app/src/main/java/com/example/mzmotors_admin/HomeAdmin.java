@@ -10,13 +10,12 @@ import android.widget.Button;
 public class HomeAdmin extends AppCompatActivity implements View.OnClickListener {
 
     Intent i;
-    Button post,pending,users,logout;
+    Button post, pending, users, logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
-
 
         logout = (Button) findViewById(R.id.btnlogout);
         post = (Button) findViewById(R.id.btnpost);
@@ -30,24 +29,23 @@ public class HomeAdmin extends AppCompatActivity implements View.OnClickListener
 
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnlogout:
-                i = new Intent(HomeAdmin.this,MainActivity.class);
+                i = new Intent(HomeAdmin.this, MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.btnpost:
-                i = new Intent(HomeAdmin.this,AllPost.class);
+                i = new Intent(HomeAdmin.this, AllPost.class);
                 startActivity(i);
                 break;
             case R.id.btnpending:
-                i = new Intent(HomeAdmin.this,PendingPost.class);
+                i = new Intent(HomeAdmin.this, PendingPost.class);
                 startActivity(i);
                 break;
             case R.id.btnusers:
-                i = new Intent(HomeAdmin.this,AllUsers.class);
+                i = new Intent(HomeAdmin.this, AllUsers.class);
                 startActivity(i);
                 break;
         }

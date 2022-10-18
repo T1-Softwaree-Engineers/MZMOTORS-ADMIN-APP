@@ -15,8 +15,8 @@
         android:fontFamily="@font/racing_sans_one"
         android:gravity="center"
         android:text="MZMOTORS"
-        android:textSize="30dp"
-        android:textColor="#0066CC">
+        android:textColor="#0066CC"
+        android:textSize="30dp">
 
     </TextView>
 
