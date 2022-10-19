@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validarUsuario("http://localhost/validation.php");
+                validarUsuario("https://ochoarealestateservices.com/mzmotors_api/db/validation.php");
             }
         });
 
