@@ -61,7 +61,7 @@
         android:drawableLeft="@drawable/usericon"
         android:drawablePadding="5dp"
         android:fontFamily="@font/poppins_semibold"
-        android:hint="Username"
+        android:hint="example@email.com"
         android:singleLine="true">
 
     </EditText>
@@ -76,6 +76,7 @@
         android:layout_marginRight="20dp"
         android:drawableLeft="@drawable/passwd"
         android:drawablePadding="5dp"
+        android:inputType="textPassword"
 
         android:fontFamily="@font/poppins_semibold"
         android:hint="Password">

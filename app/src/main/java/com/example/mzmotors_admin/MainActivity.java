@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validarUsuario("https://ochoarealestateservices.com/mzmotors_api/db/validation.php");
+                validarUsuario("https://ochoarealestateservices.com/mzmotors_api/db/validation_admin.php");
             }
         });
 
@@ -59,12 +59,26 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            if(!response.isEmpty())
+
+            if(response.equals("no_email"))
+            {
+                Toast.makeText(MainActivity.this, "Ingrese un email", Toast.LENGTH_SHORT).show();
+            }
+            if(response.equals("empty_password"))
+            {
+                Toast.makeText(MainActivity.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
+            }
+            else if(response.equals("empty_data"))
+            {
+                Toast.makeText(MainActivity.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+            }
+
+            else if(response.equals("1"))
             {
                 Intent intent = new Intent(getApplicationContext(), HomeAdmin.class);
                 startActivity(intent);
             }
-            else
+            else if(response.equals("no_verif"))
             {
                 Toast.makeText(MainActivity.this, "Email o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }
