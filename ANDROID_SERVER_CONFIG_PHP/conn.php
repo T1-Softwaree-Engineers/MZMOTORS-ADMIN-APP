@@ -10,6 +10,6 @@
         echo "Failed to connect to MySQL";
     } else
     {
-        echo "Connected to MySQL";
+        
     }
 ?>

@@ -8,7 +8,7 @@ include 'conn.php';
     //$password = "123tamarindo";
     $password 	= hash('sha512', $password);
 
-    $sel_smt = $conn->prepare("SELECT * FROM usuarios WHERE email = ? AND pwd = ? and rol = 0");
+    $sel_smt = $conn->prepare("SELECT * FROM usuarios WHERE email = ? AND pwd = ? and rol = 1");
     $sel_smt->bind_Param("ss", $email, $password);
     $sel_smt->execute();
 
