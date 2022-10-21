@@ -1,15 +1,18 @@
 <?php
-    $hostname = "localhost";
-    $username = "u584847502_mzmotors";
-    $password = "dvm>uErPz!4";
-    $database = "u584847502_mzmotors";
-
-    $conn = new mysqli($hostname, $username, $password, $database);
-    if($conn->connect_errno)
-    {
-        echo "Failed to connect to MySQL";
-    } else
-    {
-        
-    }
+	$db_host = "localhost"; //localhost server 
+	$db_user = "";	//database username
+	$db_password = "";	//database password   
+	$db_name = "";	//database name
+	try
+	{
+	  global $db;
+		$db=new PDO("mysql:host={$db_host};dbname={$db_name}",$db_user,$db_password);
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		//echo "conexion exitosa";
+	}
+	
+	catch(PDOEXCEPTION $e)
+	{
+		$e->getMessage();
+	}
 ?>

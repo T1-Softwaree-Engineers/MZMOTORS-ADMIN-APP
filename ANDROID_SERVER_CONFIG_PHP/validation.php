@@ -1,41 +1,70 @@
 <?php
-include 'conn.php';
+    include 'conn.php';
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+		$email		=$_POST["email"];	//textbox nombre "txt_email"
+		$password	=$_POST["password"];	//textbox nombre "txt_password"
+		
+		//$email = "eochoa11@ucol.mx";
+		//$password = "123tamarindo";
+		
+		$password 	= hash('sha512', $password);
+		
+		//echo "<br>" . $email ."<br>", $password;
+		
+		if(empty($email))
+		{						
+			echo "empty_email";
+		}
+		else if(empty($password))
+		{
+			echo "empty_password";
+		}
 
-    //$email = "prueba@correo.com";
-    //$password = "123tamarindo";
-    $password 	= hash('sha512', $password);
-
-    $sel_smt = $conn->prepare("SELECT * FROM usuarios WHERE email = ? AND pwd = ? and rol = 0");
-    $sel_smt->bind_Param("ss", $email, $password);
-    $sel_smt->execute();
-
-    $result = $sel_smt->get_result();
-    
-    
-    if($email == "" && $password == "")
-    {
-        echo "empty_data";
-    }
-    else if($email == "")
-    {
-        echo "no_email";
-    }
-    else if($password == "")
-    {
-        echo "empty_password";
-    }
-    else if ($fila = $result->fetch_assoc())
-    {
-        echo "1";
-    }
-    else
-    {
-        echo "no_verif";
-    }
-
-    $sel_smt->close();
-    $conn->close();
+		else if($email AND $password)
+		{
+			try
+			{
+				$select_stmt=$db->prepare("SELECT email, pwd FROM usuarios WHERE email=:uemail AND pwd=:upassword AND rol = 0"); 
+				$select_stmt->bindParam(":uemail",$email);
+				$select_stmt->bindParam(":upassword",$password);
+				$select_stmt->execute();	//execute query
+				
+				while($row=$select_stmt->fetch(PDO::FETCH_ASSOC))	
+				{
+					$dbemail	=$row["email"];
+					$dbpassword	=$row["pwd"];
+					//echo "<br><br>";
+					//echo $row ['email'];
+					//echo "<br>";
+					//echo $row ['pwd'];
+					//echo "<br>";
+				}
+				if($email!=null AND $password!=null)	
+				{
+					if($select_stmt->rowCount()>0)
+					{
+						if($email==$dbemail and $password==$dbpassword)
+						{
+                            echo "1";
+						}
+						else
+						{
+							echo "error_todo";
+						}
+					}
+					else
+					{
+						echo "error_todo_2";
+					}
+				}
+			}
+			catch(PDOException $e)
+			{
+				$e->getMessage();
+			}		
+		}
+		else
+		{
+			echo "empty_all";
+		}
 ?>

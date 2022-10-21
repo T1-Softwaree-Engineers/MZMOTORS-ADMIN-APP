@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.emailUser);
         editPassword = findViewById(R.id.passwordUser);
 
-
         btnlogin = findViewById(R.id.btnlogin);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
             else if(response.equals("1"))
             {
+                Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), HomeAdmin.class);
                 startActivity(intent);
             }
