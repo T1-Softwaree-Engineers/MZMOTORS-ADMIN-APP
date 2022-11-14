@@ -7,8 +7,7 @@
 
 	include_once 'db.php';
 	
-	$user = new Database();
-
+	$admin = new Database();
 
 	$api = $_SERVER['REQUEST_METHOD'];
 
@@ -26,10 +25,10 @@
 
 	if ($api == 'GET') {
 		
-		$email = $user->test_input($_GET['email']);
-		$password = $user->test_input($_GET['pwd']);
+		$email = $admin->test_input($_GET['email']);
+		$password = $admin->test_input($_GET['pwd']);
 		$password = hash('sha512', $password);
-		echo json_encode($user->login($email, $password));
+		echo json_encode($admin->loginAdm($email, $password));
 	}
 
 	if ($api == 'POST') {

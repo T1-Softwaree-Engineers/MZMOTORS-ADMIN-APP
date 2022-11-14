@@ -7,7 +7,7 @@
 
 	include_once 'db.php';
 	
-	$user = new Database();
+	$post = new Database();
 
 
 	$api = $_SERVER['REQUEST_METHOD'];
@@ -26,22 +26,33 @@
 
 	if ($api == 'GET') {
 		
-		$email = $user->test_input($_GET['email']);
-		$password = $user->test_input($_GET['pwd']);
-		$password = hash('sha512', $password);
-		echo json_encode($user->login($email, $password));
+		$email = $post->test_input($_GET['email']);
+		echo json_encode($post->getPublicaciones($email));
 	}
 
 	if ($api == 'POST') {
-		$nombre = $user->test_input($_POST['nombre']);
-		$email = $user->test_input($_POST['email']);
-		$contacto = $user->test_input($_POST['contacto']);
-		$password = $user->test_input($_POST['pwd']);
-		$password = hash('sha512', $password);
-		if ($user->insert($nombre, $email, $contacto, $password)) {
-			echo $user->message('User added successfully!',false);
+		$email = $post->test_input($_POST['Email']);
+		$imagen = $_POST['Foto'];
+		$titulo = $post->test_input($_POST['Title']);
+		$condicion = $post->test_input($_POST['Condition']);
+        $año = $post->test_input($_POST['Year']);
+        $marca = $post->test_input($_POST['Brand']);
+        $modelo = $post->test_input($_POST['Model']);
+        $features = $post->test_input($_POST['Features']);
+        $ubicacion = $post->test_input($_POST['Location']);
+        $precio = $post->test_input($_POST['Price']);
+        $descripcion = $post->test_input($_POST['Description']);
+
+		$fNombre = "Xbox";
+		$path = "images/$fNombre.jpg";
+		$actualPath = "https://ochoarealestateservices.com/mzmotors/$path";
+
+		if ($post->insertPost($email, $actualPath, $titulo, $marca, $modelo, $año, $precio, $ubicacion, $features, $condicion, $descripcion)) {
+			file_put_contents($path, base64_decode($imagen));
+			echo $post->message('Post added successfully!',false);
+			//echo "Se guardo la Imagen correctamente"
 		} else {
-			echo $user->message('Failed to add an user!',true);
+			echo $post->message('Failed to add an Post!',true);
 		}
 	}
 
@@ -60,7 +71,7 @@
 	if ($api == 'PUT') {
 	  parse_str(file_get_contents('php://input'), $post_input);
 
-	  $nombre = $user->test_input($post_input['nombre']);
+	  $nombre = $post->test_input($post_input['nombre']);
 	  $email = $user->test_input($post_input['email']);
 	  $contacto = $user->test_input($post_input['contacto']);
       $password = $user->test_input($post_input['pwd']);

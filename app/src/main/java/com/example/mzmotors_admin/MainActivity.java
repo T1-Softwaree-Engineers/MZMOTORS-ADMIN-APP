@@ -1,6 +1,8 @@
 package com.example.mzmotors_admin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +18,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Intent i;
     Button btnlogin;
     EditText editEmail, editPassword;
+    String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +55,22 @@ public class MainActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validarUsuario("https://ochoarealestateservices.com/mzmotors_api/db/validation_admin.php");
+                email = editEmail.getText().toString();
+                password = editPassword.getText().toString();
+                if (email.isEmpty())
+                {
+                    Toast.makeText(MainActivity.this, "Ingrese un email valido",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else if (password.isEmpty())
+                {
+                    Toast.makeText(MainActivity.this, "Ingrese una contraseña",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    validarUsuario("https://ochoarealestateservices.com/mzmotors/admin.php?email="+email+"&pwd="+password);
+                }
             }
         });
 
@@ -55,51 +78,41 @@ public class MainActivity extends AppCompatActivity {
 
     private void validarUsuario(String URL)
     {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL ,new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = response.getJSONObject(0);
+                    String uName = jsonObject.getString("nombre");
+                    String uEmail = jsonObject.getString("email");
+                    String uPhone = jsonObject.getString("contacto");
+                    Toast.makeText(MainActivity.this, "Inicio Exitoso", Toast.LENGTH_SHORT).show();
+                    guardarSession(uName,uEmail,uPhone);
+                    startActivity(new Intent(MainActivity.this, HomeAdmin.class));
+                    finish();
+                }catch (JSONException e){
+                    Toast.makeText(MainActivity.this, "Usuario o Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        RequestQueue requestQueue2 = Volley.newRequestQueue(this);
+        requestQueue2.add(jsonArrayRequest);
 
-            if(response.equals("no_email"))
-            {
-                Toast.makeText(MainActivity.this, "Ingrese un email", Toast.LENGTH_SHORT).show();
-            }
-            if(response.equals("empty_password"))
-            {
-                Toast.makeText(MainActivity.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
-            }
-            else if(response.equals("empty_data"))
-            {
-                Toast.makeText(MainActivity.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
-            }
+    }
 
-            else if(response.equals("1"))
-            {
-                Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), HomeAdmin.class);
-                startActivity(intent);
-            }
-            else if(response.equals("no_verif"))
-            {
-                Toast.makeText(MainActivity.this, "Email o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-            String text = error.toString();
-            Log.e("error",text);
-        }
-    }){
-        @Override
-        protected Map<String, String> getParams() throws AuthFailureError {
-            Map<String, String> parametros = new HashMap<String, String>();
-            parametros.put("email", editEmail.getText().toString());
-            parametros.put("password", editPassword.getText().toString());
-            return parametros;
-        }
-    };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+    private void guardarSession(String uName, String uEmail, String uPhone) {
+        SharedPreferences datosU = getSharedPreferences("sessionUsuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=datosU.edit();
+        editor.putString("nombre",uName);
+        editor.putString("email",uEmail);
+        editor.putString("phone",uPhone);
+        editor.putBoolean("session",true);
+        editor.commit();
     }
 }
