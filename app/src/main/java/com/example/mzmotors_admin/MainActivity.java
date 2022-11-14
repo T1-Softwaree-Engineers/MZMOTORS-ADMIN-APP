@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Intent i;
     Button btnlogin;
     EditText editEmail, editPassword;
-    String email, password;
+    String email, password, key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email = editEmail.getText().toString();
                 password = editPassword.getText().toString();
+                key = "9137462850";
                 if (email.isEmpty())
                 {
                     Toast.makeText(MainActivity.this, "Ingrese un email valido",
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    validarUsuario("https://ochoarealestateservices.com/mzmotors/admin.php?email="+email+"&pwd="+password);
+                    validarUsuario("https://ochoarealestateservices.com/mzmotors/admin.php?email="+email+"&pwd="+password+"&key="+key);
                 }
             }
         });
