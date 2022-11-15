@@ -32,6 +32,7 @@ public class HomeAdmin extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
             case R.id.btnlogout:
                 i = new Intent(HomeAdmin.this, MainActivity.class);
                 startActivity(i);
