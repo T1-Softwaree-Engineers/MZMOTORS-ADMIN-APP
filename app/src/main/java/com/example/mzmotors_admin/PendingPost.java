@@ -59,7 +59,7 @@ public class PendingPost extends AppCompatActivity {
 
         SharedPreferences datosU = getSharedPreferences("sessionUsuario", Context.MODE_PRIVATE);
         String uEmail = datosU.getString("email", "???Email???");
-        verPublicaciones("https://ochoarealestateservices.com/mzmotors/indexpublis.php");
+        verPublicaciones("https://ochoarealestateservices.com/mzmotors/indexpublisauth.php");
     }
 
     public void verPublicaciones(String URL) {
