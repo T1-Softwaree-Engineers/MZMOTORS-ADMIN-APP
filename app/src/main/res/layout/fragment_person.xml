@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F9FAFB"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".person">
+
+    <!--
+        *Profile
+        *My post
+        *Sell Car
+        *Boton LogOUT
+
+    -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topbar">
+
+        <TextView
+            android:id="@+id/txtlogo"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/racing_sans_one"
+            android:gravity="center"
+            android:text="MZMOTORS"
+            android:textColor="#0066CC"
+            android:textSize="30dp">
+
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/txtmypost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtlogo"
+            android:layout_marginTop="15dp"
+
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:text="User Account"
+            android:textColor="#262626"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/post_container"
+        android:background="@drawable/layout_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topbar"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="60dp">
+
+        <!--Boton Perfil-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardElevation="0dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_baseline_person_24"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:text="Profile"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_semibold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--Boton MyPost-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnMyPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_below="@+id/btnProfile"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardElevation="0dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="1dp"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_shopping_bag_24"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:text="My Post"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_semibold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <!--Boton Sell Car-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnvender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnMyPost"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginBottom="15dp"
+            app:cardElevation="0dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_baseline_attach_money_24"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:text="Sell a Car"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_semibold"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--Boton Pending Posts-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnpend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnvender"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginBottom="15dp"
+            app:cardElevation="0dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/pendientes"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:text="Pending posts"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_semibold"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--Boton All Posts-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnpend"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginBottom="15dp"
+            app:cardElevation="0dp"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/post"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:text="All posts"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_semibold"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check our privacity polices"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins"
+                android:textSize="13dp"
+                android:layout_marginBottom="10dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins"
+                android:text="Terms and conditions"
+                android:textColor="#0066CC"
+                android:textSize="13dp">
+
+            </TextView>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

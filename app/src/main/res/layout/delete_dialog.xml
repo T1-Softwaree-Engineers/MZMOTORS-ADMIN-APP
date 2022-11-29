@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="#F5F5F5"
+        android:backgroundTint="@color/browser_actions_bg_grey"
         app:cardCornerRadius="20dp">
 
         <RelativeLayout
@@ -16,12 +16,12 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txt1"
+                android:id="@+id/txt1Mensaje"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
                 android:text="Do you want to delete this post?"
                 android:textColor="@color/black"
@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt1"
+                android:layout_below="@+id/txt1Mensaje"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins"
