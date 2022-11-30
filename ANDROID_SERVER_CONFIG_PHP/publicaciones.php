@@ -28,13 +28,14 @@
 		
 		$email = $post->test_input($_GET['email']);
 		echo json_encode($post->getPublicaciones($email));
+		/*$last_id = $post->getPostId($email);
+		$last = $last_id[0]['id_post'];
+		echo $last;*/
 	}
 
 	if ($api == 'POST') {
 		
 		$email = $post->test_input($_POST['Email']);
-
-		$imagen = $_POST['Foto'];
 		$titulo = $post->test_input($_POST['Title']);
 		$condicion = $post->test_input($_POST['Condition']);
         $año = $post->test_input($_POST['Year']);
@@ -44,7 +45,6 @@
         $ubicacion = $post->test_input($_POST['Location']);
         $precio = $post->test_input($_POST['Price']);
         $descripcion = $post->test_input($_POST['Description']);
-        $nombreImg = $post->test_input($_POST['nom']);
 
         $directorioActual= getcwd();
         		
@@ -52,21 +52,20 @@
 		
 		$last = $last_id[0]['id_post'];
 		
-        $id = $last + 1;
-		$directorioNuevo = $id;
+        $last = $last + 1;
             
-		mkdir("users/" .$email . "/" . $directorioNuevo, 0777);
+		mkdir("users/" .$email . "/" . $last, 0777);
 			
-		echo "Directorio creado"; 
-
+	    echo "Directorio creado";
+	    
+	    //Crear rutas de las imagenes
 		
-		$path = "users/$email/$directorioNuevo/$id.jpg";
+		$path = "users/$email/$last";
 		$actualPath = "https://ochoarealestateservices.com/mzmotors/$path";
 
 		if ($post->insertPost($email, $actualPath, $titulo, $marca, $modelo, $año, $precio, $ubicacion, $features, $condicion, $descripcion)) {
-			file_put_contents($path, base64_decode($imagen));
+		
 			echo $post->message('Post added successfully!',false);
-			
 			//echo "Se guardo la Imagen correctamente"
 		} else {
 			echo $post->message('Failed to add an Post!',true);
@@ -86,28 +85,23 @@
 
     
 	if ($api == 'PUT') {
-	  parse_str(file_get_contents('php://input'), $post_input);
-
-	  $nombre = $post->test_input($post_input['nombre']);
-	  $email = $user->test_input($post_input['email']);
-	  $contacto = $user->test_input($post_input['contacto']);
-      $password = $user->test_input($post_input['pwd']);
-      $password = hash('sha512', $password);
-
-	  if ($id != null) {
-	    if ($user->update($nombre, $email, $contacto, $id)) {
-	      echo $user->message('User updated successfully!',false);
-	    } else {
-	      echo $user->message('Failed to update an user!',true);
-	    }
-	  } else {
-	    echo $user->message('User not found!',true);
-	  }
-	}
+	    //parse_str(file_get_contents('php://input'), $post_input);
+        if ($id != null) {
+            if ($post->updateMarkSold($id)) {
+	            echo $post->message('User updated successfully!',false);
+    	    }else{
+	            echo $post->message('Failed to update an user!',true);
+	        }
+        }else{
+            echo $post->message('User not found!', true);
+        }
+	 } 
+	
 
 	if ($api == 'DELETE') {
 	  if ($id != null) {
-	    if ($post->deletePublicaciones($id)) {
+	      $email = $_GET['email'];
+	    if ($post->deletePublicaciones($id, $email)) {
 	      echo $post->message('User deleted successfully!', false);
 	    } else {
 	      echo $post->message('Failed to delete an user!', true);
