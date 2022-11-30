@@ -10,7 +10,7 @@ import android.widget.Button;
 public class HomeAdmin extends AppCompatActivity implements View.OnClickListener {
 
     Intent i;
-    Button post, pending, users, logout;
+    Button post, pending, logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +20,10 @@ public class HomeAdmin extends AppCompatActivity implements View.OnClickListener
         logout = (Button) findViewById(R.id.btnlogout);
         post = (Button) findViewById(R.id.btnpost);
         pending = (Button) findViewById(R.id.btnpending);
-        users = (Button) findViewById(R.id.btnusers);
 
         logout.setOnClickListener(this);
         post.setOnClickListener(this);
         pending.setOnClickListener(this);
-        users.setOnClickListener(this);
 
     }
 
@@ -43,10 +41,6 @@ public class HomeAdmin extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.btnpending:
                 i = new Intent(HomeAdmin.this, PendingPost.class);
-                startActivity(i);
-                break;
-            case R.id.btnusers:
-                i = new Intent(HomeAdmin.this, AllUsers.class);
                 startActivity(i);
                 break;
         }

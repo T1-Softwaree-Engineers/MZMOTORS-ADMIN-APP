@@ -77,6 +77,22 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"/>
+            <ImageView
+                android:id="@+id/authorizePost"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/auth"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="5dp"/>
+            <ImageView
+                android:id="@+id/cancelPost"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/cerrar"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="85dp"
+                android:layout_marginTop="5dp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -134,7 +150,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_centerHorizontal="true"
                 android:text="Mark a Sold"
-                android:textSize="10dp"/>
+                android:textSize="10dp"
+                android:backgroundTint="@color/black"/>
         </RelativeLayout>
 
 

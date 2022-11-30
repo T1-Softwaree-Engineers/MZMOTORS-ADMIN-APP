@@ -72,7 +72,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgCar, imgVendida, imgAutorizada, delete;
+        ImageView imgCar, imgVendida, imgAutorizada, delete, auth, unauth;
         TextView title, price;
         CardView cardPost;
 
@@ -82,6 +82,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             imgCar = itemView.findViewById(R.id.img_MyCarPostContainer);
             imgAutorizada = itemView.findViewById(R.id.Autorizada);
             delete = itemView.findViewById(R.id.DeleteMyPost);
+            auth = itemView.findViewById(R.id.authorizePost);
+            unauth = itemView.findViewById(R.id.cancelPost);
             title = itemView.findViewById(R.id.MyTitle);
             price = itemView.findViewById(R.id.MyPrice);
             vendido = itemView.findViewById(R.id.vendido);
@@ -110,6 +112,24 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     Toast.makeText(context, "ID: "+item.getId(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(context, ""+item.getEmail_user(), Toast.LENGTH_SHORT).show();
                     openDialogDelete(item);
+                }
+            });
+
+            auth.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, "ID: "+item.getId(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, ""+item.getEmail_user(), Toast.LENGTH_SHORT).show();
+                    openDialogAuth(item);
+                }
+            });
+
+            unauth.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, "ID: "+item.getId(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, ""+item.getEmail_user(), Toast.LENGTH_SHORT).show();
+                    openDialogUnauth(item);
                 }
             });
 
@@ -148,6 +168,56 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 mData.remove(item);
                 notifyDataSetChanged();
                 deletePost("https://ochoarealestateservices.com/mzmotors/publicaciones.php?id="+item.getId()+"&email="+item.getEmail_user());
+                d_contact.dismiss();
+            }
+        });
+
+        Button btn_cancel = d_contact.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                d_contact.dismiss();
+            }
+        });
+    }
+
+    private void openDialogAuth(ListElement item)
+    {
+        d_contact.setContentView((R.layout.auth_dialog));
+        d_contact.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        d_contact.show();
+
+        Button btn_confirm = d_contact.findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notifyDataSetChanged();
+                authPost("https://ochoarealestateservices.com/mzmotors/publisadmin.php?id="+item.getId()+"&email="+item.getEmail_user());
+                d_contact.dismiss();
+            }
+        });
+
+        Button btn_cancel = d_contact.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                d_contact.dismiss();
+            }
+        });
+    }
+
+    private void openDialogUnauth(ListElement item)
+    {
+        d_contact.setContentView((R.layout.unauth_dialog));
+        d_contact.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        d_contact.show();
+
+        Button btn_confirm = d_contact.findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notifyDataSetChanged();
+                unauthPost("https://ochoarealestateservices.com/mzmotors/publisadmin2.php?id="+item.getId());
                 d_contact.dismiss();
             }
         });
@@ -204,6 +274,70 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
                 }else {
                     Toast.makeText(context, "Publicacion Eliminada Exitosamente", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, ""+error, Toast.LENGTH_SHORT).show();
+                Log.e("error",error.getMessage());
+
+            }
+        });/*{
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id", item.getId());
+                return parametros;
+            }
+        };*/
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    private void authPost(String URL){
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.isEmpty()){
+                    Toast.makeText(context, "Ocurrio un Error al autorizar la Publicacion", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(context, "Publicacion autorizada Exitosamente", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, ""+error, Toast.LENGTH_SHORT).show();
+                Log.e("error",error.getMessage());
+
+            }
+        });/*{
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("id", item.getId());
+                return parametros;
+            }
+        };*/
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    private void unauthPost(String URL){
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.isEmpty()){
+                    Toast.makeText(context, "Ocurrio un Error al cambiar el estado de la Publicacion", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(context, "Publicacion oculta Exitosamente", Toast.LENGTH_SHORT).show();
 
                 }
 

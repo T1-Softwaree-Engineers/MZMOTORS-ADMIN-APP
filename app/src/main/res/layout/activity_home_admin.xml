@@ -90,33 +90,10 @@
     </TextView>
 
     <Button
-        android:id="@+id/btnusers"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@id/btnpending"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="25dp"
-        android:backgroundTint="#0066CC"
-        android:text="USERS"
-        android:textAlignment="viewStart"
-        app:icon="@drawable/users"
-        app:iconPadding="20dp">
-    </Button>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnusers"
-        android:text="Management of all users"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp">
-    </TextView>
-
-    <Button
         android:id="@+id/btnlogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnusers"
+        android:layout_below="@+id/btnpending"
         android:layout_centerHorizontal="true"
 
         android:layout_marginLeft="40dp"

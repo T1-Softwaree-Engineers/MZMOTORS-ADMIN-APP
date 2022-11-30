@@ -39,9 +39,6 @@
             android:name=".AllPost"
             android:exported="false" />
         <activity
-            android:name=".AllUsers"
-            android:exported="false" />
-        <activity
             android:name=".HomeAdmin"
             android:exported="false" />
         <activity
