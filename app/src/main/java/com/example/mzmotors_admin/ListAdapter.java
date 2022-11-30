@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<ListElement> mData;
     private LayoutInflater mInflater;
     private Context context;
+    TextView vendido;
+    Button markSold;
+
+
 
     public ListAdapter(List<ListElement> itemList, Context context) {
         this.mInflater = LayoutInflater.from(context);
@@ -62,7 +67,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     }
 
+
     public void setItems(List<ListElement> items) {mData = items; }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgCar, imgVendida, imgAutorizada, delete;
@@ -77,23 +84,39 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             delete = itemView.findViewById(R.id.DeleteMyPost);
             title = itemView.findViewById(R.id.MyTitle);
             price = itemView.findViewById(R.id.MyPrice);
+            vendido = itemView.findViewById(R.id.vendido);
             cardPost = itemView.findViewById(R.id.MyFoto_titlePost);
+            markSold = itemView.findViewById(R.id.MarcarVendida);
         }
 
         void bindData(final ListElement item) {
-            Picasso.get().load(item.getImgCar()).error(R.mipmap.ic_launcher_round).into(imgCar);
+            imgCar.setImageResource(R.drawable.aveo);
+            Picasso.get().load(item.getImgCar()+"/nomImg0.jpg").error(R.mipmap.ic_launcher_round).into(imgCar);
             title.setText(item.getTitle());
-            price.setText("$ "+item.getPrice());
+            NumberFormat formatoImporte = NumberFormat.getCurrencyInstance();
+            price.setText(formatoImporte.format(item.getPrice()));
             if(item.getAutorizada() == 1){
                 imgAutorizada.setImageResource(R.drawable.cheque);
             }
-
+            if(item.getVendida() == 1){
+                vendido.setText("SOLD");
+                markSold.setEnabled(false);
+            }
             d_contact = new Dialog(context);
+
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(context, "ID: "+item.getId(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, ""+item.getEmail_user(), Toast.LENGTH_SHORT).show();
                     openDialogDelete(item);
+                }
+            });
+
+            markSold.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openMarcarComoVendidaDialog(item);
                 }
             });
 
@@ -104,13 +127,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     Bundle p = new Bundle();
                     p.putSerializable("MyPost", item);
                     i.putExtras(p);
+                    i.putExtra("YourPost", true);
                     context.startActivity(i);
                 }
             });
         }
     }
 
+
     private void openDialogDelete(ListElement item) {
+
         d_contact.setContentView(R.layout.delete_dialog);
         d_contact.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         d_contact.show();
@@ -121,7 +147,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             public void onClick(View view) {
                 mData.remove(item);
                 notifyDataSetChanged();
-                deletePost("https://ochoarealestateservices.com/mzmotors/publicaciones.php?id="+item.getId());
+                deletePost("https://ochoarealestateservices.com/mzmotors/publicaciones.php?id="+item.getId()+"&email="+item.getEmail_user());
                 d_contact.dismiss();
             }
         });
@@ -134,6 +160,40 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             }
         });
     }
+
+
+    private void openMarcarComoVendidaDialog(ListElement item){
+        d_contact.setContentView(R.layout.delete_dialog);
+        d_contact.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        d_contact.show();
+
+        TextView mensaje = d_contact.findViewById(R.id.txt1Mensaje);
+        mensaje.setText("Do you want to Mark a SOLD this post");
+
+        Button btn_confirm = d_contact.findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                markSoldPost("https://ochoarealestateservices.com/mzmotors/publicaciones.php?id="+item.getId());
+                d_contact.dismiss();
+                markSold.setEnabled(false);
+                vendido.setText("SOLD");
+
+            }
+        });
+
+        Button btn_cancel = d_contact.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                d_contact.dismiss();
+            }
+        });
+    }
+
+
+
+
 
     private void deletePost(String URL){
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, URL, new Response.Listener<String>() {
@@ -163,6 +223,33 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 return parametros;
             }
         };*/
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+
+    private void markSoldPost(String URL){
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.isEmpty()){
+                    Toast.makeText(context, "Ocurrio un Error al Eliminar la Publicacion", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(context, "Publicacion Vendida Exitosamente", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, ""+error, Toast.LENGTH_SHORT).show();
+                Log.e("error",error.getMessage());
+
+            }
+        });
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }

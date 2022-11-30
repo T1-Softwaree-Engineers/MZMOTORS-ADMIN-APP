@@ -63,6 +63,7 @@ public class AllPost extends AppCompatActivity {
                     for (int i=0; i < response.length(); i++){
                         jsonObject = response.getJSONObject(i);
                         String pId = "" + jsonObject.getInt("id_post");
+                        String pEUser = jsonObject.getString("email_user");
                         String pTitle = jsonObject.getString("titulo");
                         double pPrice = jsonObject.getDouble("precio");
                         String pFoto = jsonObject.getString("photos");
@@ -77,7 +78,7 @@ public class AllPost extends AppCompatActivity {
                         int pAutorizada = jsonObject.getInt("autorizada");
                         int pVendida = jsonObject.getInt("vendida");
 
-                        elements.add(new ListElement(pId, pFoto, pTitle, pMarca, pModelo, pAño, pPrice, pUbicacion, pFeatures, pCondicion, pDescripcion, pAutorizada, pVendida));
+                        elements.add(new ListElement(pId, pEUser, pFoto, pTitle, pMarca, pModelo, pAño, pPrice, pUbicacion, pFeatures, pCondicion, pDescripcion, pAutorizada, pVendida));
                     }
                     init();
                 } catch (JSONException e) {
