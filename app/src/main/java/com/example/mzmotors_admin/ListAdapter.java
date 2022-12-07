@@ -92,12 +92,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
 
         void bindData(final ListElement item) {
+
             imgCar.setImageResource(R.drawable.aveo);
             Picasso.get().load(item.getImgCar()+"/nomImg0.jpg").error(R.mipmap.ic_launcher_round).into(imgCar);
             title.setText(item.getTitle());
             NumberFormat formatoImporte = NumberFormat.getCurrencyInstance();
             price.setText(formatoImporte.format(item.getPrice()));
             if(item.getAutorizada() == 1){
+                auth.setVisibility(View.GONE);
+                unauth.setVisibility(View.GONE);
                 imgAutorizada.setImageResource(R.drawable.cheque);
             }
             if(item.getVendida() == 1){

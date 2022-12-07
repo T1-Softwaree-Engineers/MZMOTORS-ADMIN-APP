@@ -47,7 +47,7 @@ import com.squareup.picasso.Picasso;
 public class CarDetails extends AppCompatActivity {
 
     Button btn_interested;
-    TextView nameCar, priceCar, descriptionCar, locationCar, detailsCar, seeAll, txtFeature, txtFeature2,favorite;
+    TextView nameCar, priceCar, descriptionCar, locationCar, detailsCar, seeAll, txtFeature, txtFeature2;
     ImageView atras;
 
     RelativeLayout footer;
@@ -71,7 +71,6 @@ public class CarDetails extends AppCompatActivity {
         detailsCar = (TextView)findViewById(R.id.carDetails);
         txtFeature = (TextView)findViewById(R.id.txtFeature);
         txtFeature2 = (TextView)findViewById(R.id.txtFeature2);
-        favorite = (TextView) findViewById(R.id.favorite);
 
         btn_interested = (Button)findViewById(R.id.btn_interested);
         atras = (ImageView)findViewById(R.id.flecha_atras);
@@ -139,12 +138,6 @@ public class CarDetails extends AppCompatActivity {
         });
 
         ListElement finalMP1 = MP;
-        favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                favorites("https://ochoarealestateservices.com/mzmotors/favorites.php", finalMP1);
-            }
-        });
 
     }
 

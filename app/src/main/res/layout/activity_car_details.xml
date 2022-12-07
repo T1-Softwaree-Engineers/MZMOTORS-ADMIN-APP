@@ -48,25 +48,6 @@
             android:orientation="horizontal">
 
             <!--Contenedor infoSec 1-->
-            <RelativeLayout
-                android:layout_width="183dp"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_baseline_favorite_24"/>
-
-                <TextView
-                    android:id="@+id/favorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Add to Favorites"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
-            </RelativeLayout>
 
 
         </LinearLayout>
@@ -264,7 +245,7 @@
             android:layout_centerHorizontal="true"
             android:backgroundTint="#0066CC"
             android:fontFamily="@font/poppins_semibold"
-            android:text="IM INTERESTED"
+            android:text="USER VIEW"
             android:textSize="18dp"
             app:cornerRadius="10dp" />
 

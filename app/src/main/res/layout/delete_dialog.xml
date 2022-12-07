@@ -47,7 +47,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="20dp"
-                android:backgroundTint="#EE0000"
+                android:backgroundTint="#0066CC"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Confirm" />
 
